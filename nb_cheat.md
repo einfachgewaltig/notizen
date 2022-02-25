@@ -8,9 +8,21 @@ nb notebooks add example
 nb home:q "search"
 # move 
 nb move home:31 CHEAT:
+# Folder
+nb list 78/
+create a new folder named "sample"
+*nb add sample --type folder*
+create a folder named "example" containing a folder named "demo"
+*nb add example/demo --type folder*
+ add a new note in the folder named "example"
+*nb add example/*
+add a new note in the folder named "demo" in "example"
+*nb add example/demo/*
+ *nb example/demo/*  (cd)
+
 # Repo
 gh repo create 
-nb remote set https://github.com/einfachgewaltig/cheat
+nb remote set https://github.com/einfachgewaltig/cheat (main)
 nb notebook:sync
 nb git fetch origin
 nb notebook:git status
@@ -34,5 +46,5 @@ nb import example.md sample.md
 
 # export 
 nb export pandoc 42 --from markdown_strict --to epub -o path/to/example.epub
- 
+nb export home:12 /path/to/example.html
 
