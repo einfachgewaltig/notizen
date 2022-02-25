@@ -44,7 +44,7 @@ samsungtvremote.md
 
 
 
-home
+
 
 
 README.md
@@ -80,7 +80,10 @@ ssh
 
 dev
 docker
-Markdown
+
 Proxmox
-Terminal
+
 cheat
+markdown
+nbcheat.md
+terminal
