@@ -1,0 +1,2 @@
+# ssh cointop.sh
+
