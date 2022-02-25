@@ -1,3 +1,0 @@
-# Links2
-
-xclip

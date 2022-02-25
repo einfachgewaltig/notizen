@@ -1,3 +1,0 @@
-# tuxedo-control center GPU process isn't usable
-tuxedo-control-center --disable-gpu-sandbox
-

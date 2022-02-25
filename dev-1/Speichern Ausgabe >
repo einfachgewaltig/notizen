@@ -1,6 +1,0 @@
-# So speichern Ausgabe Befehls  Datei  bash
->leitet die Ausgabe eines Befehls in eine Datei um und ersetzt den vorhandenen Inhalt der Datei.
->>leitet die Ausgabe um eines Befehls an eine Datei, wobei die Ausgabe an den vorhandenen Inhalt der Datei angehängt wird.
-
-ls> / Pfad / zu / Datei
-
