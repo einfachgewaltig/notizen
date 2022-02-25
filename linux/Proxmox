@@ -1,0 +1,125 @@
+ssh root@openelec.local
+
+######### Prio ########################
+#######################################
+qm stop 200
+ /etc/init.d/lightdm start
+
+###DURCHREICHEN!###########################
+qm set 103 -scsi1 /dev/disk/by-id/ata-ST31000524AS_9VPCJ7AA
+-scsi1 /dev/disk/by-id/ata-ST31000524AS_9VPCJ7AA
+#################### #################################
+
+/etc/pve/qemu-server/
+
+#############
+
+/var/lock/qemu-server/lock-101.conf
+                https://192.168.178.99:8006
+                ssh raphael@192.168.178.99
+##freeNAS##
+https://192.168.178.65
+/etc/pve/qemu-server/
+sata0: /dev/disk/by-id/ata-ST31000524AS_9VPCJ7AA
+sata1: /dev/disk/by-id/ata-ST4000DM005-2DP166_ZDH1D3LY
+
+Netmask         255.255.255.0
+Gateway         192.168.178.1
+DNS             192.168.178.1
+
+Fritzbox        92.200.201.228
+
+
+
+#####GPU PASSTHROUGH #######
+https://www.reddit.com/r/homelab/comments/b5xpua/the_ultimate_beginners_guide_to_gpu_passthrough/
+https://www.reddit.com/r/homelab/comments/b5xpua/the_ultimate_beginners_guide_to_gpu_passthrough/
+https://pve.proxmox.com/wiki/PCI(e)_Passthrough
+echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf (EINMALIG)
+/etc/pve/qemu-server# nano 110.conf 
+args: -cpu 'host,+kvm_pv_unhalt,+kvm_pv_eoi,hv_vendor_id=NV43FIX,kvm=off'
+cpu: host,hidden=1,flags=+pcid
+
+All Functions: YNO
+PCI-EXPRESS: YES
+Rom-Bar: YES
+Primary GPU: NO
+PCI-Express: YES (requires 'machine: q35' in vm config file)
+
+
+############################################
+#########Festplatte##########################
+lsblk
+lshw -class disk -class storage
+ls /dev/disk/by-id/
+parted /dev/*** mklabel gpt
+cfdisk /dev/sdc
+###########################
+
+## PCI#########################################
+lspci
+
+
+apt update && apt dist-upgrade
+
+
+
+#####################################
+################TURNKEY##############
+https://pve.proxmox.com/wiki/Linux_Container
+https://forum.proxmox.com/threads/unprivileged-containers.26148/page-2#post-248550
+
+
+########################################
+########################################
+
+
+############WINDOWS DISKPART#############
+list disk
+select disk 
+clean'
+a
+active
+format fs=ntfs quick
+assign letter=h
+
+
+
+
+
+
+
+
+
+
+########### Install nicht zuende #######
+(youtube)###############################
+https://www.youtube.com/watch?v=DHpkD5N6HC0
+nano /etc/apt/sources.list.d/pve-enterprise.list
+#deb https://enterprise.proxmox.com/debian/pve stretch pve-enterprise
+
+nano /etc/apt/sources.list.d/pve-stretch pve nosubscription
+
+sudo nano -w /etc/default/grub
+update grub
+
+/etc/sudors
+
+apt install xfce4 chromium lightdm xfce4-terminal
+
+##################Nextcloud#############
+#####################################
+  GNU nano 4.4                                                                                                      PLUGIN_INFO                                                                                                                
+Database Name: nextcloud
+Database User: dbadmin
+Database Password: Gmdd6ZqjFTSnCDN2
+Nextcloud Admin User: ncadmin
+Nextcloud Admin Password: 7HJnrDzFIJIeW93F
+
+
+
+
+################Rasperry################
+##################################
+sudo dd of=/dev/mmcblk0 if=/home/wayne/Downloads/OpenELEC-RPi.arm-8.0.4.img
+++++++++AUF SD++++++++

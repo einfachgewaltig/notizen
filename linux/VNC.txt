@@ -1,0 +1,266 @@
+
+##  noVNC (Webbrowser)
+yum install git
+after that download noVNC
+
+$git clone git://github.com/kanaka/noVNC   
+
+$ cd noVNC
+$ ./utils/launch.sh --vnc 192.168.100.195:5901
+after that you get output like:
+
+Warning: could not find self.pem
+Starting webserver and WebSockets proxy on port 6080
+WebSocket server settings:
+  - Listen on :6080
+  - Flash security policy server
+  - Web server. Web root: /home/xmodulo/noVNC
+  - No SSL/TLS support (no cert file)
+  - proxying from :6080 to 192.168.1.10:5900
+
+Navigate to this URL:
+
+    http://127.0.0.1:6080/vnc.html?host=127.0.0.1&port=6080
+
+Press Ctrl-C to exit
+
+
+
+
+
+
+
+## Tigervnnc
+vncserver :1 -geometry 1920x1080 -depth 24
+systemctl start vncserver@:1.service
+
+https://www.howtoforge.com/how-to-install-and-configure-vnc-server-on-centos-8/
+Log in or Sign up
+Howtoforge
+Tutorials
+Tutorial search
+TagsForumsLinux CommandsSubscribeISPConfigNews
+
+Search...
+
+Home
+How to Install and Configure VNC Server on CentOS 8
+>
+How to Install and Configure VNC Server on CentOS 8
+This tutorial exists for these OS versions
+CentOS 8
+CentOS 7
+CentOS 6.5
+On this page
+Prerequisites
+Getting Started
+Install VNC Server
+Create New User and Set VNS Password
+Create Systemd Service File for VNC
+Access VNC Server
+Conclusion
+VNC stands for "Virtual Network Computing" is a GUI desktop sharing application that can be used to access and control other computers over a network. It uses the Remote Frame Buffer protocol and works on a client/server model. Generally, it is used by technical support people to manage and troubleshoot desktop, server and other network devices remotely.
+
+In this tutorial, we will show you how to install VNC server on CentOS 8.
+
+Prerequisites
+A system running CentOS 8 Desktop operating system.
+A root password is configured on your server.
+Getting Started
+By default, SELinux is enabled in CentOS 8 operating system and the VNC server will not work properly if SELinux is enabled. So it is a good idea to disable the SELinux in your system. You can disable it by editing the following file:
+
+nano /etc/sysconfig/selinux
+Find the following line:
+
+SELINUX=enforcing
+And, replace it with the following line:
+
+SELINUX=disabled
+Save and close the file when you are finished. Then, restart your system to implement the changes.
+Install VNC Server
+By default, TigerVNC is available in the CentOS 8 default repository. You can install it by running the following command:
+
+dnf install tigervnc-server tigervnc-server-module -y
+Once the installation has been completed, you can proceed to the next step.
+
+Create New User and Set VNS Password
+Next, you will need to create a new user for VNC remote desktop session. You can create a new user with name hitesh as shown below:
+
+useradd hitesh
+Next, set password for this user with the following command:
+
+passwd hitesh
+Next, switch the user to the hitesh and set VNC password for this user with the following command:
+
+su - hitesh
+ vncpasswd
+Provide your desired password and hit enter to create the password as shown below:
+
+Password:
+Verify:
+Would you like to enter a view-only password (y/n)? n
+A view-only password is not used
+Next, exit from the hitesh user with the following command:
+
+exit
+Create Systemd Service File for VNC
+Next, you will need to create a systemd service file for VNC. You can create it with the following command:
+
+nano /etc/systemd/system/vncserver@.service
+Add the following lines:
+
+[Unit]
+Description=Remote Desktop VNC Service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+WorkingDirectory=/home/hitesh
+User=hitesh
+Group=hitesh
+
+ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
+ExecStart=/usr/bin/vncserver -autokill %i
+ExecStop=/usr/bin/vncserver -kill %i
+
+[Install]
+WantedBy=multi-user.target
+Save and close the file when you are finished. Then, reload the systemd daemon with the following command:
+
+systemctl daemon-reload
+Next, start the VNC service on display 1 and enable to start after system reboot with the following command:
+
+systemctl start vncserver@:1.service
+ systemctl enable vncserver@:1.service
+You can now check the status of VNC service with the following command:
+
+systemctl status vncserver@:1.service
+You should get the following output:
+
+? vncserver@:1.service - Remote Desktop VNC Service
+   Loaded: loaded (/etc/systemd/system/vncserver@.service; disabled; vendor preset: disabled)
+   Active: active (running) since Fri 2020-03-06 03:45:50 EST; 45s ago
+  Process: 2196 ExecStart=/usr/bin/vncserver -autokill :1 (code=exited, status=0/SUCCESS)
+  Process: 2190 ExecStartPre=/bin/sh -c /usr/bin/vncserver -kill :1 > /dev/null 2>&1 || : (code=exited, status=0/SUCCESS)
+    Tasks: 180 (limit: 12537)
+   Memory: 347.3M
+   CGroup: /system.slice/system-vncserver.slice/vncserver@:1.service
+           ??2203 /usr/bin/Xvnc :1 -auth /home/hitesh/.Xauthority -desktop centos8:1 (hitesh) -fp catalogue:/etc/X11/fontpath.d -geometry 1024>
+           ??2210 sh -c (/home/hitesh/.vnc/xstartup; /usr/bin/vncserver -kill :1) >> '/home/hitesh/.vnc/centos8:1.log' 2>&1 &
+           ??2211 /bin/sh /home/hitesh/.vnc/xstartup
+           ??2212 /usr/libexec/gnome-session-binary
+           ??2221 dbus-launch --sh-syntax --exit-with-session
+           ??2222 /usr/bin/dbus-daemon --syslog --fork --print-pid 6 --print-address 8 --session
+           ??2230 /usr/bin/ssh-agent /etc/X11/xinit/Xclients
+           ??2246 /usr/libexec/at-spi-bus-launcher
+           ??2251 /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 3
+           ??2253 /usr/libexec/at-spi2-registryd --use-gnome-session
+           ??2257 /usr/libexec/gvfsd
+           ??2264 /usr/libexec/gvfsd-fuse /home/hitesh/.gvfs -f -o big_writes
+           ??2292 /usr/bin/gnome-keyring-daemon --start --components=secrets
+           ??2336 /usr/libexec/gsd-power
+VNC server is now started and listening on port 5901. You can check it with the following command:
+
+netstat -tunlp | grep 5901
+You should get the following output:
+
+tcp        0      0 0.0.0.0:5901            0.0.0.0:*               LISTEN      2203/Xvnc           
+tcp6       0      0 :::5901                 :::*                    LISTEN      2203/Xvnc
+Access VNC Server
+VNC server is now installed and configured, it's time to access your VNC server from the remote computer.
+
+On the Windows/Linux machine, open the VNC Viewer application and provide your VNC server address as shown below:
+
+Your-server-ip:5901
+
+Connect to VNC server
+
+Click on the Continue button. You should see the following screen:
+
+Authenticate with username and password
+
+Provide your VNC password and click on the OK button. Once you are connected, you should see your CentOS desktop in the following screen:
+
+Remote desktop via VNC
+
+Conclusion
+Congratulations! you have successfully installed and configured the VNC server on CentOS 8. I hope this will help you to manage remote computers easily over the network.
+
+Hitesh Jethva
+About Hitesh Jethva
+
+Over 8 years of experience as a Linux system administrator. My skills include a depth knowledge of Redhat/Centos, Ubuntu Nginx and Apache, Mysql, Subversion, Linux, Ubuntu, web hosting, web server, Squid proxy, NFS, FTP, DNS, Samba, LDAP, OpenVPN, Haproxy, Amazon web services, WHMCS, OpenStack Cloud, Postfix Mail Server, Security etc.
+
+ view as pdf |  print
+
+Share this page:
+   
+
+Suggested articles
+3 Comment(s)
+Add comment
+Name * 
+Email * 
+
+
+
+p
+
+Comments
+By: fedorReply  
+# Next may be neccesary if firewall is on
+
+firewall-cmd --add-port=5901/tcp --permanent
+
+firewall-cmd --reload
+
+ 
+
+By: AndresReply  
+Hello,
+
+I get the following error when I try to start the VNC service: "[root @ Lab1 pai] # systemctl start vncserver @: 1.service
+
+Work for vncserver @: 1.service failed because the control process exited with an error code.
+
+See "systemctl status vncserver @: 1.service" and "journalctl -xe" for details."
+
+By: tonyReply  
+this turtorial didn't work for me. I followed the steps and vnc starts fine but when i try to connect using VNC viewer I got: 'the connection was refused by the host computer'. I even switched off the centos 8 firewall and still got the same error
+
+
+Home
+How to Install and Configure VNC Server on CentOS 8
+>
+Sign up now!
+   
+Tutorial Info
+
+Author:Hitesh Jethva
+Tags:centos, linux, server
+Share This Page
+
+   
+
+40.2k Followers
+
+Popular Tutorials
+
+How to Install MongoDB on AlmaLinux 8
+How to Install Redis Server on Debian 11
+ISPConfig Perfect Multiserver setup on Ubuntu 20.04 and Debian 10
+How to Install AngularJS on AlmaLinux 8
+Securing Your Server With A Host-based Intrusion Detection System
+Install and Configure Elasticsearch on Rocky Linux 8
+How to Setup Rsyslog Server on Debian 11
+What is EFS (Elastic File System) in AWS and how to use it
+How to Install Java 17 (JDK 17) on Debian 11
+How to Install Icinga 2 Monitoring Software on Debian 11
+Xenforo skin by Xenfocus
+Contribute
+Contact
+Help
+Imprint and Legal Notice
+Top
+RSS-Feed
+Terms and Rules Privacy PolicyHowtoforge © projektfarm GmbH.

@@ -1,0 +1,8 @@
+# Cent OS Rocky Repo list 
+
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+
+sudo dnf install epel-release
+sudo dnf config-manager --enable epel
+sudo dnf config-manager --set-enabled powertools
