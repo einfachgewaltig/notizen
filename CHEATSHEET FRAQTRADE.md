@@ -1,4 +1,4 @@
-# CHEATSHEET FRAQTRADE
+# freqtradeCHEAT
 
 **[Yolo](#section-title)**
 
