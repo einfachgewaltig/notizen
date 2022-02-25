@@ -1,0 +1,8 @@
+#ranger
+Copying, moving and deleting files
+To copy  press yy, 
+to paste it, instead, we can press p.
+To move files, what we do is pressing dd to “cut” them, 
+and then p to paste them in the appropriate place.
+ Finally, do delete a file, we press dD. 
+All of these actions can also be accomplished by running the appropriate commands: copy, paste, rename <newname> and delete, respectively.

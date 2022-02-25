@@ -1,0 +1,31 @@
+# Ubuntu VNC Server und Xfce install 
+
+## Schritt 1 — Installation der Desktop-Umgebung und des VNC-Servers
+sudo apt install xfce4 xfce4-goodies
+
+sudo apt install tightvncserver
+
+vncserver
+
+
+## Schritt 2 — Konfiguration des VCN Servers
+
+vncserver -kill :1
+
+mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
+
+nano ~/.vnc/xstartup
+#!/bin/bash
+xrdb $HOME/.Xresources
+startxfce4 &
+
+sudo chmod +x ~/.vnc/xstartup
+
+vncserver
+
+
+## Schritt 3 — Eine sichere Verbindung mit dem VCN Desktop
+ssh -L 5901:127.0.0.1:5901 -C -N -l 94.16.104.246
+
+
+
