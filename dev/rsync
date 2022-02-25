@@ -1,5 +1,6 @@
 # rsync
 [PUSH]
+rsync [optionen] rsync://user@x.x.x.x[:PORT][QUELLE] [ZIELPFAD]
 sudo rsync -a -P 33445 --info=progress2 --no-i-r /tmp einfachgewaltig@94.16.104.246:/tmp
 
 rsync [quelle] [Zielpfad]
