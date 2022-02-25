@@ -1,4 +1,6 @@
-# rsync 
+# rsync
+[PUSH]
+sudo rsync -a -P 33445 --info=progress2 --no-i-r /tmp einfachgewaltig@94.16.104.246:/tmp
 
 rsync [quelle] [Zielpfad]
 ## Ein wichtiger Hinweis
@@ -18,8 +20,8 @@ rsync -r /home/data/ root@94.16.104.246:/home/data-backup
 *Pull*
 rsync [optionen] user@x.x.x.x:[Quelle] [Zielpfad]
 rsync [optionen] [QUELLE] rsync://user@x.x.x.x[:PORT][ZIELPFAD]
-
-rsync -rv -e "ssh -p 33445" raphael@cloud.raphael-christopher.de:/var/www/vhosts/raphael-christopher.de/.nextcloud/data/9dd00c2c27eb/raphael/files/nb ~/
+sudo rsync -a -P 33445 --info=progress2 --no-i-r /tmp einfachgewaltig@94.16.104.246:/tmp
+rsync -rv -a -P 33445 --info=progress2 --no-i-r  einfachgewaltig@94.16.104.246:/tmp/ramdisk/freqtrade $HOME/Nextcloud/nb/quant
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Nützliche Optionen für Rsync
 Rsync bietet viele Optionen zur Änderung des Standardverhaltens des Dienstprogramms. Wir haben bereits einige der notwendigen Flags besprochen.
