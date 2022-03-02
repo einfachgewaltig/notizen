@@ -1,4 +1,6 @@
 # schleifenxmal
-for ((i=1 ; i<=ANZAHL ; i++ )); do 
-  ANWEISUNGEN
-done
+for ((i = 0; i < 5; i++));
+ do 
+echo "hi"
+echo "Welcome $i times"
+done 
