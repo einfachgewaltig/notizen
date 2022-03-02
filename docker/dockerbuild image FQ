@@ -1,8 +1,0 @@
-# docker build &:<y image FQ
-
-## build
- docker build -t freqtrade -f Dockerfile.eigene .
-
-
-## 
-docker run --rm -v /etc/timezone:/etc/timezone:ro -v `pwd`/config.json:/freqtrade/config.json -it freqtrade trade

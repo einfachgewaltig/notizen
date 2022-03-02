@@ -1,2 +1,0 @@
-# docker STAK deploy 
-docker stack deploy -c <(docker-compose config) stackName
