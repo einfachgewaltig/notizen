@@ -1,4 +1,4 @@
-# case
+# Mehrfachauswahl mit case
  case Variable in
     Muster1) Kommando1 ;;
     Muster2) Kommando2 ;;
